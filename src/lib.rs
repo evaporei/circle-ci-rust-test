@@ -27,3 +27,11 @@ pub fn greet(s: &str) {
 
     alert(s);
 }
+
+#[cfg(test)]
+mod test {
+    #[test]
+    fn it_works() {
+        assert!(true);
+    }
+}
