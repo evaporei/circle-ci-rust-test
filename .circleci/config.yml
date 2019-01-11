@@ -1,24 +1,30 @@
 version: 2
 
 jobs:
-  build:
+  build_wasm:
     docker:
       - image: rust
     steps:
       - checkout
-      - run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-      - run: wasm-pack build
+      - run:
+          name: Install wasm-pack
+          command: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+      - run:
+          name: Build wasm
+          command: wasm-pack build
 
   test:
     docker:
       - image: rust
     steps:
       - checkout
-      - run: cargo test
+      - run:
+          name: Run tests
+          command: cargo test
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - build_wasm
       - test
